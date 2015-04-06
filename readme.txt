@@ -124,6 +124,24 @@ function custom_default_property_type_terms() {
   return $property_type_terms;
 }`
 
+= How can I get a list of listings using the WordPress JSON API? =
+
+1. First you must install and activate Jetpack and connect it to your WordPress.com account.
+
+2. Make sure the JSON API module is enabled within Jetpack
+
+3. Now you can use the JSON API provided by WordPress.com to list properties. 
+
+Example to list all Listings:
+`https://public-api.wordpress.com/rest/v1.1/sites/$SITENAME/posts/?type=listing`
+
+Example on how to get all Listings with 5 Bathrooms:
+`https://public-api.wordpress.com/rest/v1.1/sites/$SITENAME/posts/?type=listing&meta_key=_listing_bathrooms&meta_value=5`
+
+The API is very powerful, and allows you to use listings with other websites/services. For more information on the API please visit their [API Documentation](https://developer.wordpress.com/docs/api/) page.
+
+= Have more questions? =
+
 For more FAQ's visit [agentevolution.com](http://www.agentevolution.com/shop/wp-listings/)
 
 == Screenshots ==
