@@ -49,7 +49,7 @@ class WP_Listings {
 			    __( 'Bedrooms:', 'wp_listings' )				=> '_listing_bedrooms',
 			    __( 'Bathrooms:', 'wp_listings' )				=> '_listing_bathrooms',
 			    __( 'Half Bathrooms:', 'wp_listings' )			=> '_listing_half_bath',
-			    __( 'Garage:', 'wp_listings' )			        => '_listing_garage'
+			    __( 'Garage:', 'wp_listings' )			        => '_listing_garage',
 			    __( 'Pool:', 'wp_listings' )					=> '_listing_pool'
 			),
 		) );
