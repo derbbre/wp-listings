@@ -2,7 +2,7 @@
   "name": "wp-listings",
   "description": "WP Listings uses custom post types, taxonomies, templates, and widgets to create a listing management system for WordPress.",
   "keywords": ["wordpress", "plugin", "listings", "listing", "real estate"],
-  "homepage": "https://roots.io",
+  "homepage": "https://wordpress.org/plugins/wp-listings/",
   "type": "wordpress-plugin",
   "require": {
 	"php": ">=5.3.2",
