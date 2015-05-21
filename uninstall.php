@@ -2,8 +2,8 @@
 if( !defined( 'ABSPATH') && !defined('WP_UNINSTALL_PLUGIN') ) exit();
 
 // Delete our Options
-// delete_option('plugin_wp_listings_settings');
-// delete_option('wp_listings_taxonomies');
+delete_option('plugin_wp_listings_settings');
+delete_option('wp_listings_taxonomies');
 // delete_option('widget_wplistings-featured-listings');
 // delete_option('widget_listings-search');
 
