@@ -4,7 +4,7 @@
 	<hr>
 	<div id="poststuff" class="metabox-holder has-right-sidebar">
 		<div id="side-info-column" class="inner-sidebar">
-		<?php do_meta_boxes('wp-listings-options', 'side', null); ?>
+		<?php // do_meta_boxes('wp-listings-options', 'side', null); ?>
 		</div>
 
         <div id="post-body">
