@@ -488,3 +488,28 @@ function wp_listings_get_listing_total() {
     $wp_listings_total_published = $wp_listings_total->publish;
     echo $wp_listings_total_published;
 }
+
+
+/*
+ * Add support for listings to WordPress At a Glance Dashboard widget
+ */
+add_filter( 'dashboard_glance_items', 'wp_listings_glance_items', 10, 1 );
+function wp_listings_glance_items( $items = array() ) {
+    $post_types = array( 'listing' );
+    foreach( $post_types as $type ) {
+        if( ! post_type_exists( $type ) ) continue;
+        $num_posts = wp_count_posts( $type );
+        if( $num_posts ) {
+            $published = intval( $num_posts->publish );
+            $post_type = get_post_type_object( $type );
+            $text = '<a href="/wp-admin/edit.php?post_type=listing" class="">' . _n( '%s ' . $post_type->labels->singular_name, '%s ' . $post_type->labels->name, $published, 'wp-listings' ) . '</a>';
+            $text = sprintf( $text, number_format_i18n( $published ) );
+            if ( current_user_can( $post_type->cap->edit_posts ) ) {
+                $items[] = sprintf( '%2$s', $type, $text ) . "\n";
+            } else {
+                $items[] = sprintf( '%2$s', $type, $text ) . "\n";
+            }
+        }
+    }
+    return $items;
+}
