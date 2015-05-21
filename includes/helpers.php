@@ -184,9 +184,9 @@ function get_column_class($columns) {
 /*
  * Function to return list of all Listings based on bedroom Count
  */
-function wp_listings_get_listings_by_bedcount($bedcount) {
+function wp_listings_get_listings_by_bedcount($bedcount, $sort_order) {
 
-    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => 'ASC',
+    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order,
             'meta_query' => array(
                 array(
                     'key' => '_listing_bedrooms',
@@ -197,7 +197,7 @@ function wp_listings_get_listings_by_bedcount($bedcount) {
         )
     );
 
-    echo '<ul id="listings-list" class="listings listings-by-bed">';
+    echo '<ul id="listings-list" class="wplistings listings listings-by-bed">';
 
     if( $listings->have_posts() ) {
         while ($listings->have_posts()) : $listings->the_post(); ?>
@@ -215,9 +215,9 @@ function wp_listings_get_listings_by_bedcount($bedcount) {
 /*
  * Function to return list of all Listings based on bathroom Count
  */
-function wp_listings_get_listings_by_bathcount($bathcount) {
+function wp_listings_get_listings_by_bathcount($bathcount, $sort_order) {
 
-    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => 'ASC',
+    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order,
             'meta_query' => array(
                 array(
                     'key' => '_listing_bathrooms',
@@ -228,7 +228,7 @@ function wp_listings_get_listings_by_bathcount($bathcount) {
         )
     );
 
-    echo '<ul id="listings-list" class="listings listings-by-bath">';
+    echo '<ul id="listings-list" class="wplistings listings listings-by-bath">';
 
     if( $listings->have_posts() ) {
         while ($listings->have_posts()) : $listings->the_post(); ?>
@@ -245,9 +245,9 @@ function wp_listings_get_listings_by_bathcount($bathcount) {
 /*
  * Function to return list of all Listings based on City
  */
-function wp_listings_get_listings_by_city($city) {
+function wp_listings_get_listings_by_city($city, $sort_order) {
 
-    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => 'ASC',
+    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order,
             'meta_query' => array(
                 array(
                     'key' => '_listing_city',
@@ -258,7 +258,7 @@ function wp_listings_get_listings_by_city($city) {
         )
     );
 
-    echo '<ul id="listings-list" class="listings listings-by-city">';
+    echo '<ul id="listings-list" class="wplistings listings listings-by-city">';
 
     if( $listings->have_posts() ) {
         while ($listings->have_posts()) : $listings->the_post(); ?>
@@ -276,9 +276,9 @@ function wp_listings_get_listings_by_city($city) {
 /*
  * Function to return list of all Listings based on State
  */
-function wp_listings_get_listings_by_state($state) {
+function wp_listings_get_listings_by_state($state, $sort_order) {
 
-    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => 'ASC',
+    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order,
             'meta_query' => array(
                 array(
                     'key' => '_listing_state',
@@ -289,7 +289,7 @@ function wp_listings_get_listings_by_state($state) {
         )
     );
 
-    echo '<ul id="listings-list" class="listings listings-by-city">';
+    echo '<ul id="listings-list" class="wplistings listings listings-by-city">';
 
     if( $listings->have_posts() ) {
         while ($listings->have_posts()) : $listings->the_post(); ?>
@@ -307,9 +307,9 @@ function wp_listings_get_listings_by_state($state) {
 /*
  * Function to return list of all Listings based on Zipcode
  */
-function wp_listings_get_listings_by_zip($zip) {
+function wp_listings_get_listings_by_zip($zip, $sort_order) {
 
-    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => 'ASC',
+    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order,
             'meta_query' => array(
                 array(
                     'key' => '_listing_zip',
@@ -320,7 +320,7 @@ function wp_listings_get_listings_by_zip($zip) {
         )
     );
 
-    echo '<ul id="listings-list" class="listings listings-by-zip">';
+    echo '<ul id="listings-list" class="wplistings listings listings-by-zip">';
 
     if( $listings->have_posts() ) {
         while ($listings->have_posts()) : $listings->the_post(); ?>
@@ -338,9 +338,9 @@ function wp_listings_get_listings_by_zip($zip) {
 /*
  * Function to return list of all Listings based on Year Built
  */
-function wp_listings_get_listings_by_yearbuilt($yearbuilt) {
+function wp_listings_get_listings_by_yearbuilt($yearbuilt, $sort_order) {
 
-    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => 'ASC',
+    $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order,
             'meta_query' => array(
                 array(
                     'key' => '_listing_year_built',
@@ -351,7 +351,7 @@ function wp_listings_get_listings_by_yearbuilt($yearbuilt) {
         )
     );
 
-    echo '<ul id="listings-list" class="listings listings-by-year-built">';
+    echo '<ul id="listings-list" class="wplistings listings listings-by-year-built">';
 
     if( $listings->have_posts() ) {
         while ($listings->have_posts()) : $listings->the_post(); ?>
@@ -371,110 +371,99 @@ function wp_listings_get_listings_by_yearbuilt($yearbuilt) {
 /*
  * Get list of all Listings Features
  */
-function wp_listings_get_listings_features_archive() {
+function wp_listings_get_listings_features_archive($orderby, $show_count, $hide_empty, $pad_counts, $feed, $hierarchial, $title_li) {
 
-    echo '<ul id="listings-features-archive-list" class="listings listings-features-archive">';
+    echo '<ul id="listings-features-archive-list" class="wplistings listings listings-features-archive">';
 
     wp_list_categories(
         array(
-            'orderby' => 'alpha',
-            'show_count' => 1,
-            'hide_empty' => 0,
-            'pad_counts' => 1,
-            'feed'       => 'Feed',
-            'hierarchical' => 1,
-            'taxonomy' => 'features',
-            'title_li' => ''
+            'orderby'      => $orderby,
+            'show_count'   => $show_count,
+            'hide_empty'   => $hide_empty,
+            'pad_counts'   => $pad_counts,
+            'feed'         => $feed,
+            'hierarchical' => $hierarchial,
+            'taxonomy'     => 'features',
+            'title_li'     => $title_li
         ));
 
     echo '</ul>';
-
-    wp_reset_query();
 
 }
 
 /*
  * Get list of all Listings Locations
  */
-function wp_listings_get_listings_locations_archive() {
+function wp_listings_get_listings_locations_archive($orderby, $show_count, $hide_empty, $pad_counts, $feed, $hierarchial, $title_li) {
 
-    echo '<ul id="listings-locations-archive-list" class="listings listings-locations-archive">';
+    echo '<ul id="listings-locations-archive-list" class="wplistings listings listings-locations-archive">';
 
     wp_list_categories(
         array(
-            'orderby' => 'name',
-            'show_count' => 1,
-            'hide_empty' => 0,
-            'pad_counts' => 1,
-            'feed'       => 'Feed',
-            'hierarchical' => 1,
-            'taxonomy' => 'locations',
-            'title_li' => ''
+            'orderby'      => $orderby,
+            'show_count'   => $show_count,
+            'hide_empty'   => $hide_empty,
+            'pad_counts'   => $pad_counts,
+            'feed'         => $feed,
+            'hierarchical' => $hierarchial,
+            'taxonomy'     => 'locations',
+            'title_li'     => $title_li
         ));
 
     echo '</ul>';
-
-    wp_reset_query();
-
 }
 
 /*
  * Get list of all Listings Status
  */
-function wp_listings_get_listings_status_archive() {
+function wp_listings_get_listings_status_archive($orderby, $show_count, $hide_empty, $pad_counts, $feed, $hierarchial, $title_li) {
 
-    echo '<ul id="listings-status-archive-list" class="listings listings-status-archive">';
+    echo '<ul id="listings-status-archive-list" class="wplistings listings listings-status-archive">';
 
     wp_list_categories(
         array(
-            'orderby' => 'alpha',
-            'show_count' => 1,
-            'hide_empty' => 0,
-            'pad_counts' => 1,
-            'feed'       => 'Feed',
-            'hierarchical' => 1,
-            'taxonomy' => 'status',
-            'title_li' => ''
+            'orderby'      => $orderby,
+            'show_count'   => $show_count,
+            'hide_empty'   => $hide_empty,
+            'pad_counts'   => $pad_counts,
+            'feed'         => $feed,
+            'hierarchical' => $hierarchial,
+            'taxonomy'     => 'status',
+            'title_li'     => $title_li
         ));
 
     echo '</ul>';
-
-    wp_reset_query();
-
 }
 
 /*
  * Get list of all Listings Type
  */
-function wp_listings_get_listings_type_archive() {
+function wp_listings_get_listings_type_archive($orderby, $show_count, $hide_empty, $pad_counts, $feed, $hierarchial, $title_li) {
 
     echo '<ul id="listings-type-archive-list" class="listings listings-type-archive">';
 
     wp_list_categories(
         array(
-            'orderby' => 'alpha',
-            'show_count' => 1,
-            'pad_counts' => 1,
-            'hide_empty' => 0,
-            'feed'       => 'Feed',
-            'hierarchical' => 1,
-            'taxonomy' => 'property-types',
-            'title_li' => ''
+            'orderby'      => $orderby,
+            'show_count'   => $show_count,
+            'hide_empty'   => $hide_empty,
+            'pad_counts'   => $pad_counts,
+            'feed'         => $feed,
+            'hierarchical' => $hierarchial,
+            'taxonomy'     => 'property-types',
+            'title_li'     => $title_li
         ));
 
     echo '</ul>';
-
-    wp_reset_query();
-
 }
 
 
 /*
  * Get list of all Listings for Archives, useful for custom archive and sitemaps pages
  */
-function wp_listings_get_listings_archive() {
+function wp_listings_get_listings_archive($sort_order) {
 
-$listings = new WP_Query( array( 'post_type' => 'listing', 'order' => 'ASC'  ) );
+$listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order  ) );
 
 echo '<ul id="listings-archive-list" class="listings listings-archive">';
 
