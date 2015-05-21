@@ -440,7 +440,7 @@ function wp_listings_get_listings_status_archive($orderby, $show_count, $hide_em
  */
 function wp_listings_get_listings_type_archive($orderby, $show_count, $hide_empty, $pad_counts, $feed, $hierarchial, $title_li) {
 
-    echo '<ul id="listings-type-archive-list" class="listings listings-type-archive">';
+    echo '<ul id="listings-type-archive-list" class="wplistings listings listings-type-archive">';
 
     wp_list_categories(
         array(
@@ -465,7 +465,7 @@ function wp_listings_get_listings_archive($sort_order) {
 
 $listings = new WP_Query( array( 'post_type' => 'listing', 'order' => $sort_order  ) );
 
-echo '<ul id="listings-archive-list" class="listings listings-archive">';
+echo '<ul id="listings-archive-list" class="wplistings listings listings-archive">';
 
 if( $listings->have_posts() ) {
     while ($listings->have_posts()) : $listings->the_post(); ?>
